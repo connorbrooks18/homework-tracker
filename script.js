@@ -43,8 +43,9 @@ class HomeworkItem {
     HomeworkItem.refreshList(itemList);
     return;
   }
-  static refreshList(listUl) {
+  static refreshList(listUl = itemList) {
     for (let i = 0; i < HomeworkItem.homeworkList.length; i++) {
+      if (listUl.children[0] === undefined) break;
       listUl.children[0].remove();
     }
     for (let i = 0; i < HomeworkItem.homeworkList.length; i++) {
@@ -53,6 +54,18 @@ class HomeworkItem {
         HomeworkItem.homeworkList[i].date
       );
     }
+    HomeworkItem.saveList();
+  }
+  static loadList() {
+    let array = JSON.parse(localStorage.getItem("homework-item-array"));
+    if (array === null) array = [];
+    HomeworkItem.homeworkList = array;
+  }
+  static saveList() {
+    localStorage.setItem(
+      "homework-item-array",
+      JSON.stringify(HomeworkItem.homeworkList)
+    );
   }
 }
 
@@ -73,6 +86,7 @@ const createElementWithText = (element, text, textInSpan = false) => {
 const deleteItem = (event) => {
   //event.target is button
   const li = event.target.parentElement;
+  const ul = li.parentElement;
   const spans = li.querySelectorAll("span");
   const name = spans[0];
   const date = spans[1];
@@ -83,6 +97,7 @@ const deleteItem = (event) => {
     }
     li.remove();
   }
+  HomeworkItem.refreshList(ul);
 };
 
 //* Create List Item Element
@@ -119,6 +134,7 @@ const createItemObject = () => {
   //Create new homework item
   const item = new HomeworkItem(createItemInput.value, dateInput.value);
   createItemLi(item.name, item.date);
+  HomeworkItem.refreshList(itemList);
 };
 
 const editListItem = (event) => {
@@ -130,13 +146,15 @@ const editListItem = (event) => {
   //Create Inputs
   const inputBox = createElementWithText("input", "");
   const dateInputBox = createElementWithText("input", "");
+  const updateBtn = createElementWithText("button", "Update");
 
   //Check for an already existing input box
   let returnNow = false;
   for (let i = 0; i < li.children.length; i++) {
     if (
       li.children[i].getAttribute("name") === "edit-item-input" ||
-      li.children[i].getAttribute("name") === "edit-date-input"
+      li.children[i].getAttribute("name") === "edit-date-input" ||
+      li.children[i].getAttribute("name") === "update-btn"
     ) {
       li.children[i].remove();
       i--;
@@ -147,9 +165,7 @@ const editListItem = (event) => {
 
   //edit the input box
   inputBox.setAttribute("name", "edit-item-input");
-  inputBox.addEventListener("keypress", (event) => {
-    if (event.key !== "Enter") return;
-
+  updateBtn.addEventListener("click", (event) => {
     //Update the homework item array
     for (let i = 0; i < HomeworkItem.homeworkList.length; i++) {
       element = HomeworkItem.homeworkList[i];
@@ -171,12 +187,18 @@ const editListItem = (event) => {
   dateInputBox.setAttribute("name", "edit-date-input");
   dateInputBox.setAttribute("type", "date");
 
+  //Edit the update button
+  updateBtn.setAttribute("name", "update-btn");
+
   //Add new input box
   li.appendChild(inputBox);
   li.appendChild(dateInputBox);
+  li.appendChild(updateBtn);
 };
 
 //* Run Necessary Funcs
+HomeworkItem.loadList();
+HomeworkItem.refreshList();
 createBtn.addEventListener("click", createItemObject);
 createItemInput.addEventListener("keypress", (event) => {
   if (event.key === "Enter") createItemObject();
