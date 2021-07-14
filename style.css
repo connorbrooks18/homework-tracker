@@ -4,6 +4,7 @@
 
 
 html, body {
+    overflow-x: hidden;
     min-height: 100vh;
     padding: 0;
     margin: 0;
@@ -94,7 +95,6 @@ input {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    padding: 0;
 }
 
 .homework-list li{
@@ -102,9 +102,11 @@ input {
     justify-content: space-between;
     border: .1rem solid var(--primary-color);
     padding: .4rem;
-    margin-bottom: 1rem;
+    margin: .5rem;
     font-size: 1.8rem;
     flex-wrap: wrap;
+    max-width: 100%;
+    overflow: auto;
 }
 .homework-list li button {
     padding: .1rem .5rem;

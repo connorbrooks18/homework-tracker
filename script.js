@@ -196,9 +196,16 @@ const editListItem = (event) => {
   li.appendChild(updateBtn);
 };
 
+//* Set the date input to be default today's date
+const setDefaultDate = () => {
+  const today = new Date();
+  dateInput.value = today.toISOString().split("T")[0];
+};
+
 //* Run Necessary Funcs
 HomeworkItem.loadList();
 HomeworkItem.refreshList();
+setDefaultDate();
 createBtn.addEventListener("click", createItemObject);
 createItemInput.addEventListener("keypress", (event) => {
   if (event.key === "Enter") createItemObject();
