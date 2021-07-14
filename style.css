@@ -89,12 +89,15 @@ input {
 
 .homework-list {
     font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .homework-list li{
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     border: .1rem solid var(--primary-color);
     padding: .4rem;
     margin-bottom: 1rem;
@@ -105,6 +108,10 @@ input {
     padding: .1rem .5rem;
     margin-left: 2rem;
     font-size: 1.4rem;
+}
+
+.homework-list li span {
+    margin: 0 .3rem;
 }
 
 .delete-btn, button[name="update-btn"] {
