@@ -105,13 +105,17 @@ input {
     padding: .1rem .5rem;
     margin-left: 2rem;
     font-size: 1.4rem;
+}
+
+.delete-btn, button[name="update-btn"] {
     background-color: var(--background-color);
     color: var(--primary-color);
 }
-/*
-.delete-btn {}
-.edit-btn {}
-*/
+
+.edit-btn {
+    background-color: var(--background-color);
+    color: var(--primary-color);   
+}
 .activated-edit-btn {
     background-color: var(--primary-color);
     color: var(--background-color);
