@@ -1,0 +1,139 @@
+
+
+/** Full Page Styles */
+
+
+html, body {
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    font-family: Yomogi, cursive;
+    font-size: 16px;
+    --background-color: rgb(171, 241, 183);
+    --background-color2: rgb(94, 156, 103);
+    --primary-color: rgb(189, 64, 39);
+    color: var(--primary-color);
+    background-color: var(--background-color);
+    background: linear-gradient(to bottom , var(--background-color), var(--background-color2))
+}
+@media only screen and (max-width: 500px) {
+    :root {
+        font-size: 10px;
+    }
+}
+@media only screen and (max-width: 350px) {
+    :root {
+        font-size: 10px;
+    }
+}
+
+main {
+    min-height: 30vh;
+}
+header h1 {
+    text-align: center;
+    font-size: 3.1rem;
+}
+
+input {
+    background: var(--background-color);
+    color: var(--primary-color);
+    border: .1rem solid var(--primary-color);
+}
+
+.small-text {
+    font-size: 1rem;
+}
+
+/* * Input Section */
+
+
+.input-section {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 1rem;
+    align-items: center;
+    font-size: 1.3rem;
+}
+
+
+.input-section label {
+    border: .1rem solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    font-family: 'Indie Flower', cursive;
+    font-size: 2rem;
+    padding: .5rem;
+}
+#homework-item-input {
+    width: min-content;
+    margin-left: .3rem;
+    font-size: inherit;
+    font-size: 1.2rem;
+}
+#homework-date-input {
+    font-size: inherit;
+}
+.create-btn {
+    color: var(--background-color);
+    background-color: var(--primary-color);
+    box-shadow: -.08rem -.08rem var(--background-color2);
+    border-color: var(--background-color2);
+    font-size: inherit;
+}
+
+
+/** Homework List */
+
+
+.homework-list {
+    font-size: 2rem;
+}
+
+.homework-list li{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: .1rem solid var(--primary-color);
+    padding: .4rem;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    flex-wrap: wrap;
+}
+.homework-list li button {
+    padding: .1rem .5rem;
+    margin-left: 2rem;
+    font-size: 1.4rem;
+}
+.delete-btn {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+}
+.edit-btn {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+}
+.activated-edit-btn {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+.homework-list li input {
+    font-size: 1.4rem;
+    margin: 0 1rem;
+}
+
+/* * List Modifiers */
+
+.list-modifiers {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.reorder-btn {
+    font-size: 1.8rem;
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    /* border: .1rem solid var(--background-color2); */
+    box-shadow: -.1rem -.1rem var(--background-color2);
+}

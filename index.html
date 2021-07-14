@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Yomogi&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
+      rel="stylesheet"
+    />
+    <title>Homework Deadline</title>
+  </head>
+  <body>
+    <!--
+    <nav>
+      <ul class="nav-list">
+        <li class="nav-item">Home</li>
+        <li class="nav-item">List</li>
+      </ul>
+    </nav>
+    -->
+    <header>
+      <h1 class="title">Homework To-Do</h1>
+    </header>
+    <main>
+      <section class="input-section">
+        <label name="homework-item-input"
+          >New Item:
+          <input
+            type="text"
+            name="homework-item-input"
+            id="homework-item-input"
+            placeholder="Math: page 133 1-23"
+        /></label>
+        <input
+          type="date"
+          name="homework-date-input"
+          id="homework-date-input"
+        />
+        <button class="create-btn" action="createItem">Create</button>
+      </section>
+      <ul class="homework-list"></ul>
+      <section class="list-modifiers">
+        <button class="reorder-btn">Reorder By Date</button>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
