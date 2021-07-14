@@ -140,8 +140,7 @@ const createItemObject = () => {
 const editListItem = (event) => {
   // Get Elements
   const li = event.target.parentElement;
-  const editBtn = document.querySelector(".edit-btn");
-  editBtn.classList.toggle("activated-edit-btn");
+  event.target.classList.toggle("activated-edit-btn");
 
   //Create Inputs
   const inputBox = createElementWithText("input", "");
@@ -165,6 +164,7 @@ const editListItem = (event) => {
 
   //edit the input box
   inputBox.setAttribute("name", "edit-item-input");
+  inputBox.setAttribute("placeholder", "New Homework Name");
   updateBtn.addEventListener("click", (event) => {
     //Update the homework item array
     for (let i = 0; i < HomeworkItem.homeworkList.length; i++) {
