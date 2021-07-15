@@ -86,20 +86,23 @@ const createElementWithText = (element, text, textInSpan = false) => {
 };
 
 const deleteItem = (event) => {
-  //event.target is button
+  //make sure that the date is in the correct format
   const li = event.target.parentElement;
-  const ul = li.parentElement;
   const spans = li.querySelectorAll("span");
-  const name = spans[0];
-  const date = spans[1];
+  const name = spans[0].textContent;
+  let date = spans[1].textContent;
+  if (changeDateViewBtn.classList.contains("activated")) {
+    date = convertDaysToDate(new Date(), Number(date.split(" ")[0]));
+    date = date.split("T")[0];
+  }
   for (let i = 0; i < HomeworkItem.homeworkList.length; i++) {
     let item = HomeworkItem.homeworkList[i];
-    if (item.date === date.textContent && item.name === name.textContent) {
+    if (item.date === date && item.name === name) {
       HomeworkItem.homeworkList.splice(i, 1);
     }
     li.remove();
   }
-  HomeworkItem.refreshList(ul);
+  HomeworkItem.refreshList();
 };
 
 //* Create List Item Element
@@ -210,7 +213,7 @@ const setDefaultDate = () => {
   dateInput.value = today.toISOString().split("T")[0];
 };
 
-const changeDateView = () => {
+const changeDateView = (refresh = true) => {
   changeDateViewBtn.classList.toggle("activated");
   const dateSpans = document.querySelectorAll(".date-span");
   const today = new Date().getTime();
@@ -225,8 +228,14 @@ const changeDateView = () => {
       )} days`;
     }
   } else {
-    HomeworkItem.refreshList();
+    if (refresh) HomeworkItem.refreshList();
   }
+};
+
+const convertDaysToDate = (date, days) => {
+  const result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result.toISOString();
 };
 
 //
