@@ -104,8 +104,11 @@ const deleteItem = (event) => {
 
 const createItemLi = (item, date) => {
   //Create New Element And Text
-  const newLi = createElementWithText("li", item, true);
-
+  const newLi = createElementWithText("li", "");
+  //Create Span with Assignment
+  const assignmentSpan = createElementWithText("span", item);
+  assignmentSpan.classList.add("assignment-span");
+  newLi.appendChild(assignmentSpan);
   //Create Span with Date
   const dateSpan = createElementWithText("span", date);
   newLi.appendChild(dateSpan);

@@ -22,7 +22,7 @@ html, body {
 }
 @media only screen and (max-width: 500px) {
     :root {
-        font-size: 10px;
+        font-size: 12px;
     }
 }
 @media only screen and (max-width: 350px) {
@@ -116,9 +116,9 @@ input {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-decoration: none;
     margin: 2rem 0;
     padding: 0;
+    list-style-type: decimal;
 }
 
 .homework-list li{
@@ -132,6 +132,11 @@ input {
     max-width: 100%;
     overflow: auto;
 }
+
+.assignment-span::before {
+    content: "• ";
+}
+
 .homework-list li > *{
     margin: .3rem;
 }
