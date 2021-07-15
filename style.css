@@ -143,6 +143,7 @@ input {
 .homework-list li > *{
     margin: .3rem;
 }
+
 .homework-list li button {
     font-size: 1.4rem;
 }
@@ -152,6 +153,10 @@ input {
     color: var(--primary-color);
 }
 
+.date-span {
+    text-decoration: underline;
+    text-decoration-color: var(--primary-color);
+}
 .edit-btn {
     background-color: transparent;
     color: var(--primary-color);   
