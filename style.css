@@ -2,20 +2,22 @@
 
 /** Full Page Styles */
 
-
 html, body {
     overflow-x: hidden;
     min-height: 100vh;
     padding: 0;
     margin: 0;
-    font-family: Yomogi, cursive;
+    font-family: Yomogi, sans-serif;
     font-size: 16px;
-    --background-color: rgb(171, 241, 183);
-    --background-color2: rgb(94, 156, 103);
-    --primary-color: rgb(189, 64, 39);
+    --background-color: #EFEFEF;
+    --background-color2: #DEDEDE;
+    --primary-color: #222;
+    --underline-color: #09F;
     color: var(--primary-color);
     background-color: var(--background-color);
-    background: linear-gradient(to bottom , var(--background-color), var(--background-color2))
+    background: linear-gradient(90deg, transparent 1rem, #abcde4 1rem, #abcde4 1.1rem, transparent 1.1rem), 
+        linear-gradient(#ccd .1rem, transparent .1rem);
+    background-size: 100% 1.2rem;
 }
 @media only screen and (max-width: 500px) {
     :root {
@@ -46,6 +48,21 @@ input {
     font-size: 1rem;
 }
 
+
+/** Instructions Section */
+
+.instruction-section {
+    margin: auto 3rem;
+    border: .2rem solid var(--background-color2);
+}
+.instructions {
+    font-size: 1.15rem;
+}
+
+input {
+    background: transparent;
+}
+
 /* * Input Section */
 
 
@@ -60,7 +77,6 @@ input {
 
 
 .input-section label {
-    border: .1rem solid var(--primary-color);
     display: flex;
     align-items: center;
     font-family: 'Indie Flower', cursive;
@@ -77,10 +93,10 @@ input {
     font-size: inherit;
 }
 .create-btn {
-    color: var(--background-color);
-    background-color: var(--primary-color);
+    color: var(--primary-color);
+    background-color: transparent;
     box-shadow: -.08rem -.08rem var(--background-color2);
-    border-color: var(--background-color2);
+    border-color: var(--primary-color);
     font-size: inherit;
 }
 
@@ -100,7 +116,6 @@ input {
 .homework-list li{
     display: flex;
     justify-content: space-between;
-    border: .1rem solid var(--primary-color);
     padding: .4rem;
     margin: .5rem;
     font-size: 1.8rem;
@@ -119,12 +134,12 @@ input {
 }
 
 .delete-btn, button[name="update-btn"] {
-    background-color: var(--background-color);
+    background-color: transparent;
     color: var(--primary-color);
 }
 
 .edit-btn {
-    background-color: var(--background-color);
+    background-color: transparent;
     color: var(--primary-color);   
 }
 .activated-edit-btn {
@@ -145,8 +160,8 @@ input {
 }
 .reorder-btn {
     font-size: 1.8rem;
-    background-color: var(--primary-color);
-    color: var(--background-color);
+    background-color: transparent;
+    color: var(--primary-color);
     /* border: .1rem solid var(--background-color2); */
     box-shadow: -.1rem -.1rem var(--background-color2);
 }
