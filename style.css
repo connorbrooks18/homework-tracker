@@ -96,7 +96,7 @@ input {
 }
 
 #homework-item-input {
-    width: min-content;
+    width: 12rem;
     margin-left: .3rem;
     font-size: 1.5rem;
 }
