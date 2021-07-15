@@ -165,6 +165,15 @@ const editListItem = (event) => {
   //edit the input box
   inputBox.setAttribute("name", "edit-item-input");
   inputBox.setAttribute("placeholder", "New Homework Name");
+  inputBox.setAttribute("value", li.children[0].textContent);
+
+  //edit the date input box
+  dateInputBox.setAttribute("name", "edit-date-input");
+  dateInputBox.setAttribute("type", "date");
+  dateInputBox.setAttribute("value", li.children[1].textContent);
+
+  //Edit the update button
+  updateBtn.setAttribute("name", "update-btn");
   updateBtn.addEventListener("click", (event) => {
     //Update the homework item array
     for (let i = 0; i < HomeworkItem.homeworkList.length; i++) {
@@ -182,13 +191,6 @@ const editListItem = (event) => {
     li.children[1].textContent = dateInputBox.value;
     HomeworkItem.reorder();
   });
-
-  //edit the date input box
-  dateInputBox.setAttribute("name", "edit-date-input");
-  dateInputBox.setAttribute("type", "date");
-
-  //Edit the update button
-  updateBtn.setAttribute("name", "update-btn");
 
   //Add new input box
   li.appendChild(inputBox);

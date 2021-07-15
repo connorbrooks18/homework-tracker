@@ -15,9 +15,10 @@ html, body {
     --underline-color: #09F;
     color: var(--primary-color);
     background-color: var(--background-color);
-    background: linear-gradient(90deg, transparent 1rem, #abcde4 1rem, #abcde4 1.1rem, transparent 1.1rem), 
-        linear-gradient(#ccd .1rem, transparent .1rem);
-    background-size: 100% 1.2rem;
+    background-image: 
+        linear-gradient(transparent 5em, rgba(255,0,0,.2) 0, transparent 5.1em), 
+        linear-gradient(rgba(0,0,255,.3) 1px, transparent 0);
+    background-size: 100% 2rem;
 }
 @media only screen and (max-width: 500px) {
     :root {
@@ -42,8 +43,14 @@ input {
     background: var(--background-color);
     color: var(--primary-color);
     border: .1rem solid var(--primary-color);
+    font-family: Yomogi, sans-serif;
 }
 
+hr {
+    background-color: var(--primary-color);
+    height: .3rem;
+    margin: auto .5rem;
+}
 .small-text {
     font-size: 1rem;
 }
@@ -53,7 +60,7 @@ input {
 
 .instruction-section {
     margin: auto 3rem;
-    border: .2rem solid var(--background-color2);
+    padding: 1rem;
 }
 .instructions {
     font-size: 1.15rem;
@@ -68,11 +75,11 @@ input {
 
 .input-section {
     display: flex;
-    justify-content: space-between;
-    margin: 0 auto;
-    padding: 1rem;
+    justify-content: space-evenly;
+    margin: auto 1rem;
     align-items: center;
     font-size: 1.3rem;
+    flex-wrap: wrap;
 }
 
 
@@ -80,17 +87,16 @@ input {
     display: flex;
     align-items: center;
     font-family: 'Indie Flower', cursive;
-    font-size: 2rem;
+    font-size: 1.8rem;
     padding: .5rem;
 }
 #homework-item-input {
     width: min-content;
     margin-left: .3rem;
-    font-size: inherit;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
 }
 #homework-date-input {
-    font-size: inherit;
+    font-size: 1.6rem;
 }
 .create-btn {
     color: var(--primary-color);
@@ -111,11 +117,14 @@ input {
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    margin: 2rem 0;
+    padding: 0;
 }
 
 .homework-list li{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    width: 90%;
     padding: .4rem;
     margin: .5rem;
     font-size: 1.8rem;
@@ -123,14 +132,11 @@ input {
     max-width: 100%;
     overflow: auto;
 }
-.homework-list li button {
-    padding: .1rem .5rem;
-    margin-left: 2rem;
-    font-size: 1.4rem;
+.homework-list li > *{
+    margin: .3rem;
 }
-
-.homework-list li span {
-    margin: 0 .3rem;
+.homework-list li button {
+    font-size: 1.4rem;
 }
 
 .delete-btn, button[name="update-btn"] {
@@ -148,7 +154,6 @@ input {
 }
 .homework-list li input {
     font-size: 1.4rem;
-    margin: 0 1rem;
 }
 
 /* * List Modifiers */
