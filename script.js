@@ -91,9 +91,11 @@ const deleteItem = (event) => {
   const spans = li.querySelectorAll("span");
   const name = spans[0].textContent;
   let date = spans[1].textContent;
-  if (changeDateViewBtn.classList.contains("activated")) {
-    date = convertDaysToDate(new Date(), Number(date.split(" ")[0]));
-    date = date.split("T")[0];
+  if (date !== "") {
+    if (changeDateViewBtn.classList.contains("activated")) {
+      date = convertDaysToDate(new Date(), Number(date.split(" ")[0]));
+      date = date.split("T")[0];
+    }
   }
   for (let i = 0; i < HomeworkItem.homeworkList.length; i++) {
     let item = HomeworkItem.homeworkList[i];
