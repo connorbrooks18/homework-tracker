@@ -55,6 +55,7 @@ class HomeworkItem {
         HomeworkItem.homeworkList[i].date
       );
     }
+    changeDateViewBtn.classList.remove("activated");
     HomeworkItem.saveList();
   }
   static loadList() {
@@ -216,6 +217,9 @@ const changeDateView = () => {
   if (changeDateViewBtn.classList.contains("activated")) {
     for (let i = 0; i < dateSpans.length; i++) {
       const date = new Date(dateSpans[i].textContent).getTime();
+      if (dateSpans[i].textContent === "") {
+        continue;
+      }
       dateSpans[i].textContent = `${Math.ceil(
         (date - today) / (1000 * 60 * 60 * 24)
       )} days`;
