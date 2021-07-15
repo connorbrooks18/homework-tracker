@@ -38,7 +38,9 @@ header h1 {
     text-align: center;
     font-size: 3.1rem;
 }
-
+h2 {
+    font-size: 2.3rem;
+}
 input {
     background: var(--background-color);
     color: var(--primary-color);
@@ -174,4 +176,14 @@ input {
     color: var(--primary-color);
     /* border: .1rem solid var(--background-color2); */
     box-shadow: -.1rem -.1rem var(--background-color2);
+}
+.days-left-btn {
+    font-size: 1.8rem;
+    background-color: transparent;
+    color: var(--primary-color);
+    box-shadow: -.1rem -.1rem var(--background-color2);
+}
+.activated {
+    background-color: var(--primary-color);
+    color: var(--background-color2);
 }

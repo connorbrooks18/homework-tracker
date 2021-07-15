@@ -12,6 +12,7 @@ const itemList = document.querySelector(".homework-list");
 const dateInput = document.querySelector("#homework-date-input");
 const createBtn = document.querySelector(".create-btn");
 const reorderBtn = document.querySelector(".reorder-btn");
+const changeDateViewBtn = document.querySelector(".days-left-btn");
 
 //* List Item Class
 
@@ -111,6 +112,7 @@ const createItemLi = (item, date) => {
   newLi.appendChild(assignmentSpan);
   //Create Span with Date
   const dateSpan = createElementWithText("span", date);
+  dateSpan.classList.add("date-span");
   newLi.appendChild(dateSpan);
   //Add Delete Button to Li
   const newBtn = createElementWithText("button", "X");
@@ -207,6 +209,26 @@ const setDefaultDate = () => {
   dateInput.value = today.toISOString().split("T")[0];
 };
 
+const changeDateView = () => {
+  changeDateViewBtn.classList.toggle("activated");
+  const dateSpans = document.querySelectorAll(".date-span");
+  const today = new Date().getTime();
+  if (changeDateViewBtn.classList.contains("activated")) {
+    for (let i = 0; i < dateSpans.length; i++) {
+      const date = new Date(dateSpans[i].textContent).getTime();
+      dateSpans[i].textContent = `${Math.ceil(
+        (date - today) / (1000 * 60 * 60 * 24)
+      )} days`;
+    }
+  } else {
+    HomeworkItem.refreshList();
+  }
+};
+
+//
+
+//
+
 //* Run Necessary Funcs
 HomeworkItem.loadList();
 HomeworkItem.refreshList();
@@ -219,3 +241,5 @@ createItemInput.addEventListener("keypress", (event) => {
 reorderBtn.addEventListener("click", () => {
   HomeworkItem.reorder();
 });
+
+changeDateViewBtn.addEventListener("click", changeDateView);
