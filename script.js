@@ -143,6 +143,16 @@ const createItemLi = (item, date) => {
 
 const createItemObject = () => {
   //Create new homework item
+  if (createItemInput.value.trim() === "") return;
+  for (let i = 0; i < HomeworkItem.homeworkList.length; i++) {
+    if (
+      HomeworkItem.homeworkList[i].name.trim() ===
+        createItemInput.value.trim() &&
+      HomeworkItem.homeworkList[i].date === dateInput.value
+    ) {
+      return;
+    }
+  }
   const item = new HomeworkItem(createItemInput.value, dateInput.value);
   createItemLi(item.name, item.date);
   HomeworkItem.refreshList(itemList);
