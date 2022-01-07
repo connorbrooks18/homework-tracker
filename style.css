@@ -57,7 +57,6 @@ hr {
     font-size: 1rem;
 }
 
-
 /** Instructions Section */
 
 .instruction-section {
@@ -147,7 +146,7 @@ input {
 }
 
 .assignment-span::before {
-    content: "• ";
+    content: "- ";
 }
 
 .homework-list li > *{
