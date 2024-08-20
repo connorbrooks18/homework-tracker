@@ -5,7 +5,7 @@
     let x = document.cookie;
 
 */
-//* Input Elements
+//* Input Elements 
 
 const createItemInput = document.querySelector("#homework-item-input");
 const itemList = document.querySelector(".homework-list");
