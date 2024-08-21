@@ -17,7 +17,7 @@ const changeDateViewBtn = document.querySelector(".days-left-btn");
 
 //* Keep track of date view
   // 0 is full date; 1 is days until
-let dateview = 0
+let dateview = 1
 
 
 //* List Item Class
