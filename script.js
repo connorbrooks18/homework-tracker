@@ -64,6 +64,7 @@ class HomeworkItem {
 //* Important Functions
 
 const refresh = (listUl = itemList, dateType=dateview) => {
+  HomeworkItem.saveList();
   HomeworkItem.reorder()
 
   // Delete previous elements
@@ -75,7 +76,7 @@ const refresh = (listUl = itemList, dateType=dateview) => {
     assignment = HomeworkItem.homeworkList[i].name
     date = "";
     if(dateType === 0) {
-      date = HomeworkItem.homeworkList[i].date;
+      date = yearFirstDateToRegular(HomeworkItem.homeworkList[i].date);
     }
     else {
       today = new Date().getTime();
@@ -186,6 +187,67 @@ const deleteItem = (event) => {
 
 
 const editListItem = (event) => {
+  const li = event.target.parentElement;
+  event.target.classList.toggle("activated-edit-btn");
+
+  //Create Inputs
+  const inputBox = createElementWithText("input", "");
+  const dateInputBox = createElementWithText("input", "");
+  const updateBtn = createElementWithText("button", "Update");
+
+  //Check for an already existing input box
+  let returnNow = false;
+  for (let i = 0; i < li.children.length; i++) {
+    if (
+      li.children[i].getAttribute("name") === "edit-item-input" ||
+      li.children[i].getAttribute("name") === "edit-date-input" ||
+      li.children[i].getAttribute("name") === "update-btn"
+    ) {
+      li.children[i].remove();
+      i--;
+      returnNow = true;
+    }
+  }
+  if (returnNow) return;
+
+  //edit the input box
+  inputBox.setAttribute("name", "edit-item-input");
+  inputBox.setAttribute("placeholder", "New Homework Name");
+  inputBox.setAttribute("value", li.children[0].textContent);
+
+  //edit the date input box
+  dateInputBox.setAttribute("name", "edit-date-input");
+  dateInputBox.setAttribute("type", "date");
+  defaultDate = new Date();
+  if(dateview === 0){
+    defaultDate = regularDateToYearFirst(li.children[1].textContent);
+  } else {
+    defaultDate = convertDaysToDate(new Date(), Number(li.children[1].textContent.split(" ")[0])).toISOString().split("T")[0];
+    console.log(defaultDate)
+  }
+  dateInputBox.setAttribute("value", defaultDate);
+
+  //Edit the update button
+  updateBtn.setAttribute("name", "update-btn");
+  updateBtn.addEventListener("click", (event) => {
+    //Update the homework item array
+    for (let i = 0; i < HomeworkItem.homeworkList.length; i++) {
+      element = HomeworkItem.homeworkList[i];
+      if ( element.name === li.children[0].textContent ) {
+        element.name = inputBox.value;
+        element.date = dateInputBox.value;
+      }
+    }
+
+  
+    refresh();
+  });
+
+  //Add new input box
+  li.appendChild(inputBox);
+  li.appendChild(dateInputBox);
+  li.appendChild(updateBtn);
+
   
   
 };
@@ -198,10 +260,18 @@ const setDefaultDate = () => {
 
 
 const convertDaysToDate = (date, days) => {
-  const result = new Date(date);
-  result.setDate(result.getDate() + days);
-  return result.toISOString();
+  date.setDate(date.getDate() + days);
+  return date
 };
+
+const regularDateToYearFirst = (regularDate) => {
+  regularDate = regularDate.split("-");
+  return regularDate[2] + "-" + regularDate[0] + "-" + regularDate[1];
+}
+const yearFirstDateToRegular = (yearFirstDate) => {
+  yearFirstDate = yearFirstDate.split("-");
+  return yearFirstDate[1] + "-" + yearFirstDate[2] + "-" + yearFirstDate[0];
+}
 
 //
 
