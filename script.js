@@ -5,14 +5,16 @@
     let x = document.cookie;
 
 */
+
+
 //* Input Elements 
 
 const createItemInput = document.querySelector("#homework-item-input");
 const itemList = document.querySelector(".homework-list");
 const dateInput = document.querySelector("#homework-date-input");
 const createBtn = document.querySelector(".create-btn");
-const reorderBtn = document.querySelector(".reorder-btn");
 const changeDateViewBtn = document.querySelector(".days-left-btn");
+
 
 //* List Item Class
 
@@ -22,13 +24,13 @@ class HomeworkItem {
   constructor(name, date) {
     this.name = name;
     this.date = date;
-    this.id = HomeworkItem.homeworkList.length;
     HomeworkItem.homeworkList.push(this);
   }
   static reorder(byDate = true, refresh = true) {
+    console.log(HomeworkItem.homeworkList)
     const list = HomeworkItem.homeworkList;
-    let returnVal = 0;
     list.sort((item1, item2) => {
+      let returnVal = 0;
       const date1 = item1.date.split("-");
       const date2 = item2.date.split("-");
       if (date1[0] === "") return -1;
@@ -41,27 +43,7 @@ class HomeworkItem {
         returnVal = Number(date1[2]) - Number(date2[2]);
       return returnVal;
     });
-    HomeworkItem.refreshList(itemList);
     return;
-  }
-  static refreshList(listUl = itemList) {
-    for (let i = 0; i < HomeworkItem.homeworkList.length; i++) {
-      if (listUl.children[0] === undefined) break;
-      listUl.children[0].remove();
-    }
-    for (let i = 0; i < HomeworkItem.homeworkList.length; i++) {
-      createItemLi(
-        HomeworkItem.homeworkList[i].name,
-        HomeworkItem.homeworkList[i].date
-      );
-    }
-    changeDateViewBtn.classList.remove("activated");
-    HomeworkItem.saveList();
-  }
-  static loadList() {
-    let array = JSON.parse(localStorage.getItem("homework-item-array"));
-    if (array === null) array = [];
-    HomeworkItem.homeworkList = array;
   }
   static saveList() {
     localStorage.setItem(
@@ -69,9 +51,31 @@ class HomeworkItem {
       JSON.stringify(HomeworkItem.homeworkList)
     );
   }
+  static loadList() {
+    let array = JSON.parse(localStorage.getItem("homework-item-array"));
+    if (array === null) array = [];
+    HomeworkItem.homeworkList = array;
+  }
 }
 
 //* Important Functions
+
+const refresh = (listUl = itemList) => {
+  HomeworkItem.reorder()
+
+  // Delete previous elements
+  listUl.innerHTML = ""
+
+
+  //Fill in with list
+  for (let i = 0; i < HomeworkItem.homeworkList.length; i++) {
+    createItemLi(
+      HomeworkItem.homeworkList[i].name,
+      HomeworkItem.homeworkList[i].date
+    );
+  }
+}
+
 
 const createElementWithText = (element, text, textInSpan = false) => {
   const newElement = document.createElement(element);
@@ -85,27 +89,7 @@ const createElementWithText = (element, text, textInSpan = false) => {
   return newElement;
 };
 
-const deleteItem = (event) => {
-  //make sure that the date is in the correct format
-  const li = event.target.parentElement;
-  const spans = li.querySelectorAll("span");
-  const name = spans[0].textContent;
-  let date = spans[1].textContent;
-  if (date !== "") {
-    if (changeDateViewBtn.classList.contains("activated")) {
-      date = convertDaysToDate(new Date(), Number(date.split(" ")[0]));
-      date = date.split("T")[0];
-    }
-  }
-  for (let i = 0; i < HomeworkItem.homeworkList.length; i++) {
-    let item = HomeworkItem.homeworkList[i];
-    if (item.date === date && item.name === name) {
-      HomeworkItem.homeworkList.splice(i, 1);
-    }
-    li.remove();
-  }
-  HomeworkItem.refreshList();
-};
+
 
 //* Create List Item Element
 
@@ -137,86 +121,58 @@ const createItemLi = (item, date) => {
 
   //Clear Input
   createItemInput.value = "";
+
 };
 
 //* CREATE ITEM Obejct FUNC
 
 const createItemObject = () => {
-  //Create new homework item
-  if (createItemInput.value.trim() === "") return;
-  for (let i = 0; i < HomeworkItem.homeworkList.length; i++) {
-    if (
-      HomeworkItem.homeworkList[i].name.trim() ===
-        createItemInput.value.trim() &&
-      HomeworkItem.homeworkList[i].date === dateInput.value
-    ) {
-      return;
+  let assignment = createItemInput.value
+  let date = dateInput.value
+  let invalid = false;
+
+  
+  HomeworkItem.homeworkList.forEach(item => {
+    if(assignment === item.name){
+      alert("Must be unique assignment name");
+      invalid = true;
+      
     }
-  }
-  const item = new HomeworkItem(createItemInput.value, dateInput.value);
-  createItemLi(item.name, item.date);
-  HomeworkItem.refreshList(itemList);
-};
-
-const editListItem = (event) => {
-  // Get Elements
-  const li = event.target.parentElement;
-  event.target.classList.toggle("activated-edit-btn");
-
-  //Create Inputs
-  const inputBox = createElementWithText("input", "");
-  const dateInputBox = createElementWithText("input", "");
-  const updateBtn = createElementWithText("button", "Update");
-
-  //Check for an already existing input box
-  let returnNow = false;
-  for (let i = 0; i < li.children.length; i++) {
-    if (
-      li.children[i].getAttribute("name") === "edit-item-input" ||
-      li.children[i].getAttribute("name") === "edit-date-input" ||
-      li.children[i].getAttribute("name") === "update-btn"
-    ) {
-      li.children[i].remove();
-      i--;
-      returnNow = true;
-    }
-  }
-  if (returnNow) return;
-
-  //edit the input box
-  inputBox.setAttribute("name", "edit-item-input");
-  inputBox.setAttribute("placeholder", "New Homework Name");
-  inputBox.setAttribute("value", li.children[0].textContent);
-
-  //edit the date input box
-  dateInputBox.setAttribute("name", "edit-date-input");
-  dateInputBox.setAttribute("type", "date");
-  dateInputBox.setAttribute("value", li.children[1].textContent);
-
-  //Edit the update button
-  updateBtn.setAttribute("name", "update-btn");
-  updateBtn.addEventListener("click", (event) => {
-    //Update the homework item array
-    for (let i = 0; i < HomeworkItem.homeworkList.length; i++) {
-      element = HomeworkItem.homeworkList[i];
-      if (
-        element.name === li.children[0].textContent &&
-        element.date === li.children[1].textContent
-      ) {
-        element.name = inputBox.value;
-        element.date = dateInputBox.value;
-      }
-    }
-
-    li.children[0].textContent = inputBox.value;
-    li.children[1].textContent = dateInputBox.value;
-    HomeworkItem.reorder();
   });
 
-  //Add new input box
-  li.appendChild(inputBox);
-  li.appendChild(dateInputBox);
-  li.appendChild(updateBtn);
+  if(assignment.trim() === "" || date.trim() === "" || invalid){
+    return;
+  }
+
+  let homeworkItem = new HomeworkItem(assignment, date);
+
+  HomeworkItem.saveList();
+
+  refresh();
+};
+
+const deleteItem = (event) => {
+  const li = event.target.parentElement;
+  const spans = li.querySelectorAll("span");
+  const name = spans[0].textContent;
+
+  for(let i = 0; i < HomeworkItem.homeworkList.length; i++){
+    item = HomeworkItem.homeworkList[i];
+    if(item.name === name){
+      HomeworkItem.homeworkList.splice(i, 1)
+      break;
+    }
+  }
+  HomeworkItem.saveList();
+
+  refresh();
+};
+
+
+
+const editListItem = (event) => {
+  
+  
 };
 
 //* Set the date input to be default today's date
@@ -225,24 +181,6 @@ const setDefaultDate = () => {
   dateInput.value = today.toISOString().split("T")[0];
 };
 
-const changeDateView = (refresh = true) => {
-  changeDateViewBtn.classList.toggle("activated");
-  const dateSpans = document.querySelectorAll(".date-span");
-  const today = new Date().getTime();
-  if (changeDateViewBtn.classList.contains("activated")) {
-    for (let i = 0; i < dateSpans.length; i++) {
-      const date = new Date(dateSpans[i].textContent).getTime();
-      if (dateSpans[i].textContent === "") {
-        continue;
-      }
-      dateSpans[i].textContent = `${Math.ceil(
-        (date - today) / (1000 * 60 * 60 * 24)
-      )} days`;
-    }
-  } else {
-    if (refresh) HomeworkItem.refreshList();
-  }
-};
 
 const convertDaysToDate = (date, days) => {
   const result = new Date(date);
@@ -255,16 +193,13 @@ const convertDaysToDate = (date, days) => {
 //
 
 //* Run Necessary Funcs
-HomeworkItem.loadList();
-HomeworkItem.refreshList();
 setDefaultDate();
+
+
+HomeworkItem.loadList();
+refresh();
+
 createBtn.addEventListener("click", createItemObject);
 createItemInput.addEventListener("keypress", (event) => {
   if (event.key === "Enter") createItemObject();
 });
-
-reorderBtn.addEventListener("click", () => {
-  HomeworkItem.reorder();
-});
-
-changeDateViewBtn.addEventListener("click", changeDateView);
