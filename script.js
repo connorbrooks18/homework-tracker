@@ -15,6 +15,10 @@ const dateInput = document.querySelector("#homework-date-input");
 const createBtn = document.querySelector(".create-btn");
 const changeDateViewBtn = document.querySelector(".days-left-btn");
 
+//* Keep track of date view
+  // 0 is full date; 1 is days until
+let dateview = 0
+
 
 //* List Item Class
 
@@ -27,7 +31,6 @@ class HomeworkItem {
     HomeworkItem.homeworkList.push(this);
   }
   static reorder(byDate = true, refresh = true) {
-    console.log(HomeworkItem.homeworkList)
     const list = HomeworkItem.homeworkList;
     list.sort((item1, item2) => {
       let returnVal = 0;
@@ -60,7 +63,7 @@ class HomeworkItem {
 
 //* Important Functions
 
-const refresh = (listUl = itemList) => {
+const refresh = (listUl = itemList, dateType=dateview) => {
   HomeworkItem.reorder()
 
   // Delete previous elements
@@ -69,9 +72,21 @@ const refresh = (listUl = itemList) => {
 
   //Fill in with list
   for (let i = 0; i < HomeworkItem.homeworkList.length; i++) {
+    assignment = HomeworkItem.homeworkList[i].name
+    date = "";
+    if(dateType === 0) {
+      date = HomeworkItem.homeworkList[i].date;
+    }
+    else {
+      today = new Date().getTime();
+      due = new Date(HomeworkItem.homeworkList[i].date).getTime();
+      date = `${Math.ceil(
+        (due - today) / (1000 * 60 * 60 * 24)
+      )} days`;
+    }
     createItemLi(
-      HomeworkItem.homeworkList[i].name,
-      HomeworkItem.homeworkList[i].date
+      assignment,
+      date
     );
   }
 }
@@ -203,3 +218,9 @@ createBtn.addEventListener("click", createItemObject);
 createItemInput.addEventListener("keypress", (event) => {
   if (event.key === "Enter") createItemObject();
 });
+
+changeDateViewBtn.addEventListener("click", (event) => {
+  dateview = 1 - dateview;
+  changeDateViewBtn.classList.toggle("activated")
+  refresh();
+})
