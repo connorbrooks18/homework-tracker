@@ -1,22 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Yomogi&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" type="text/css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
-      rel="stylesheet"
-    />
-    <title>Homework Deadline</title>
-  </head>
-  <body>
-    <!--
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" type="text/css" />
+  <title>Homework Deadline</title>
+</head>
+
+<body>
+  <!--
     <nav>
       <ul class="nav-list">
         <li class="nav-item">Home</li>
@@ -24,43 +18,33 @@
       </ul>
     </nav>
     -->
-    <header>
-      <h1 class="title">Homework To-Do</h1>
-    </header>
-    <main>
-      <section class="instruction-section">
-        <h2>How to Use...</h2>
-        <p class="instructions">
-          <!-- ok lol -->
-          You can enter new homework assignments by writing out the assignment
-          itself and then the due date. All your assignments will be saved to
-          this device and you can edit it if you need to.
-        </p>
-      </section>
-      <hr />
-      <section class="input-section">
-        <label name="homework-item-input"
-          >New Item:
-          <input
-            type="text"
-            name="homework-item-input"
-            id="homework-item-input"
-            placeholder="Math: page 133"
-        /></label>
-        <input
-          type="date"
-          name="homework-date-input"
-          id="homework-date-input"
-        />
-        <button class="create-btn" action="createItem">Create</button>
-      </section>
-      <hr />
+  <header>
+    <h1 class="title">Homework To-Do</h1>
+  </header>
+  <main>
+
+    <section class="input-section">
+      <label name="homework-item-input">New Item:
+        <input type="text" name="homework-item-input" id="homework-item-input" placeholder="Math: page 133-134" /></label>
+      <input type="date" name="homework-date-input" id="homework-date-input" />
+      <button class="create-btn" action="createItem">Create</button>
+    </section>
+
+    <hr>
+
+    <section class="homework-list-section">
+      <h3 class="homework-list-heading">Homework List</h3>
       <ol class="homework-list"></ol>
-      <section class="list-modifiers">
-        <button class="reorder-btn">Reorder By Date</button>
-        <button class="days-left-btn">Change Date View</button>
-      </section>
-    </main>
-    <script src="script.js"></script>
-  </body>
+    </section>
+
+    <hr>
+
+    <section class="list-modifiers">
+      <button class="days-left-btn">Change Date View</button>
+    </section>
+
+  </main>
+  <script src="script.js"></script>
+</body>
+
 </html>

@@ -6,7 +6,7 @@ html, body {
     min-height: 100vh;
     padding: 0;
     margin: 0;
-    font-family: Yomogi, sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 16px;
     --background-color: #EFEFEF;
     --background-color2: #DEDEDE;
@@ -17,8 +17,7 @@ html, body {
     background-image: linear-gradient(rgba(0,0,255,.3) 1px, purple 0),
         linear-gradient(green 5em, rgba(255,0,0, 1) 0, red 5.1em) ;
     background-size: 100% 2rem; */
-    background-image: linear-gradient(0deg, transparent 5em, rgba(255,0,0,.2) 0, transparent 5.1em), 
-    linear-gradient(rgba(0,0,255,.3) 1px, transparent 0);
+    background:#DEDEDE;
     background-size: 100% 2rem;
 }
 @media only screen and (max-width: 500px) {
@@ -45,7 +44,7 @@ input {
     background: var(--background-color);
     color: var(--primary-color);
     border: .1rem solid var(--primary-color);
-    font-family: Yomogi, sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 hr {
@@ -57,24 +56,7 @@ hr {
     font-size: 1rem;
 }
 
-/** Instructions Section */
 
-.instruction-section {
-    margin: auto 3rem;
-    padding: 0rem;
-}
-.instruction-section h2 {
-    line-height: 4rem;
-}
-.instructions {
-    font-size: 1.15rem;
-    line-height: 2rem;
-    content: none;
-}
-
-input {
-    background: transparent;
-}
 
 /* * Input Section */
 
@@ -96,7 +78,7 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Indie Flower', cursive;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 1.8rem;
     padding: .5rem;
     flex-wrap: wrap;
@@ -121,22 +103,28 @@ input {
 
 /** Homework List */
 
+.homework-list-section {
+    min-height: 10rem;
+}
+
+.homework-list-section h3 {
+    text-align: center;
+    text-decoration: underline;
+}
 
 .homework-list {
+    height: 100%;
     font-size: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     margin: 2rem 0;
     list-style-type: decimal;
     line-height: 2rem;
+
+    text-align: left;
 }
 
 .homework-list li{
     display: flex;
     justify-content: space-evenly;
-    line-height: default;
     width: 90%;
     margin: .2rem;
     font-size: inherit;
@@ -189,13 +177,7 @@ input {
 .list-modifiers button {
     margin: .2rem;
 }
-.reorder-btn {
-    font-size: 1.8rem;
-    background-color: transparent;
-    color: var(--primary-color);
-    /* border: .1rem solid var(--background-color2); */
-    box-shadow: -.1rem -.1rem var(--background-color2);
-}
+
 .days-left-btn {
     font-size: 1.8rem;
     background-color: transparent;

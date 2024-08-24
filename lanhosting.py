@@ -21,7 +21,8 @@ class handler(BaseHTTPRequestHandler):
         
 
 def main():
-    server = HTTPServer(('192.168.4.42', 8000), handler)
+    server = HTTPServer(('192.168.6.254', 8000), handler) 
+    # server = HTTPServer(('127.0.0.1', 5500), handler)
     print('Starting server, use <Ctrl-C> to stop')
     server.serve_forever()
 
