@@ -252,10 +252,12 @@ const editListItem = (event) => {
   
 };
 
-//* Set the date input to be default today's date
+//* Set the date input to be default tomorrow's date
 const setDefaultDate = () => {
-  const today = new Date();
+  let today = new Date();
+  today.setDate(today.getDate() + 1);
   dateInput.value = today.toISOString().split("T")[0];
+  console.log(dateInput.value);
 };
 
 
@@ -279,6 +281,7 @@ const yearFirstDateToRegular = (yearFirstDate) => {
 
 //* Run Necessary Funcs
 setDefaultDate();
+
 
 
 HomeworkItem.loadList();
