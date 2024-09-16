@@ -83,7 +83,7 @@ const refresh = (listUl = itemList, dateType=dateview) => {
       due = new Date(HomeworkItem.homeworkList[i].date).getTime();
       date = `${Math.ceil(
         (due - today) / (1000 * 60 * 60 * 24)
-      )} days`;
+      )} day(s)`;
     }
     createItemLi(
       assignment,
